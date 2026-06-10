@@ -1,0 +1,187 @@
+@import "tailwindcss";
+
+/* ===========================================================
+   Hondengedrag Zeeland — designsysteem v2
+   Modern grotesk, warm aards palet, expo-easing.
+   Demo door Agensea.
+   =========================================================== */
+
+@theme {
+  /* Palet */
+  --color-duin: #f4eee2; /* warm linnen, papier */
+  --color-duin-50: #fbf7ef;
+  --color-duin-100: #f7f2e9;
+  --color-duin-200: #ede4d4;
+  --color-duin-300: #ddd0bb;
+
+  --color-den: #1a201d; /* inkt, diep warm zwartgroen */
+  --color-den-600: #2a322e;
+  --color-getij: #14302b; /* donkere filmische secties */
+  --color-getij-700: #0e2722;
+
+  --color-salie: #7d8a7e; /* steen / salie */
+  --color-salie-300: #a8b2a7;
+  --color-salie-100: #d4dad2;
+
+  --color-klei: #c06a40; /* terracotta accent */
+  --color-klei-400: #d4855e;
+  --color-klei-600: #9d5330;
+
+  --color-mist: #cdd6d1;
+
+  /* Typografie */
+  --font-display: "Bricolage Grotesque Variable", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  /* Easings */
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.42, 0.64, 1);
+}
+
+/* ---------- Base ---------- */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+  html.lenis,
+  html.lenis body { height: auto; }
+  .lenis.lenis-smooth { scroll-behavior: auto !important; }
+  .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+  .lenis.lenis-stopped { overflow: hidden; }
+
+  body {
+    background-color: var(--color-duin);
+    color: var(--color-den);
+    font-family: var(--font-sans);
+    font-weight: 400;
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-weight: 640;
+    letter-spacing: -0.025em;
+    line-height: 1.04;
+    text-wrap: balance;
+  }
+
+  p { text-wrap: pretty; }
+  a, button { -webkit-tap-highlight-color: transparent; }
+
+  ::selection { background: var(--color-klei); color: var(--color-duin-50); }
+
+  :focus-visible {
+    outline: 2px solid var(--color-klei);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  img { -webkit-user-drag: none; user-select: none; }
+}
+
+/* ---------- Display helpers ---------- */
+.display { font-weight: 680; letter-spacing: -0.035em; }
+.tnum { font-variant-numeric: tabular-nums; }
+
+/* ---------- Filmische korrel ---------- */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0.045;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- Reveal-systeem (progressive enhancement) ---------- */
+html.js:not(.rm) [data-reveal] {
+  opacity: 0;
+  transform: translateY(34px) scale(0.985);
+  transition:
+    opacity 0.85s var(--ease-expo) var(--d, 0s),
+    transform 0.85s var(--ease-expo) var(--d, 0s);
+}
+html.js:not(.rm) [data-reveal].in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Beeld-reveal: container klipt open, inner beeld zoomt rustig uit */
+.reveal-media { overflow: hidden; }
+html.js:not(.rm) .reveal-media {
+  clip-path: inset(0 0 101% 0);
+  transition: clip-path 1.15s var(--ease-expo) var(--d, 0s);
+}
+html.js:not(.rm) .reveal-media.in { clip-path: inset(0 0 0 0); }
+html.js:not(.rm) .reveal-media > img,
+html.js:not(.rm) .reveal-media > picture > img {
+  transform: scale(1.12);
+  transition: transform 1.7s var(--ease-expo) var(--d, 0s);
+}
+html.js:not(.rm) .reveal-media.in > img,
+html.js:not(.rm) .reveal-media.in > picture > img { transform: scale(1); }
+
+/* Kinetische kop: woord voor woord, GEEN clip (descenders blijven heel) */
+html.js:not(.rm) .words .word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.46em) rotate(1.4deg);
+  transition:
+    opacity 0.72s var(--ease-expo) var(--d, 0s),
+    transform 0.72s var(--ease-expo) var(--d, 0s);
+}
+html.js:not(.rm) .words.in .word { opacity: 1; transform: none; }
+
+/* ---------- Micro-interacties ---------- */
+.press { transition: transform 0.22s var(--ease-quint); }
+.press:active { transform: scale(0.97); }
+
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.4s var(--ease-expo);
+  padding-bottom: 2px;
+}
+.link-underline:hover { background-size: 100% 1px; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-family: var(--font-sans);
+  font-weight: 560;
+  letter-spacing: -0.01em;
+  border-radius: 999px;
+  transition:
+    transform 0.5s var(--ease-expo),
+    background-color 0.45s var(--ease-expo),
+    color 0.45s var(--ease-expo),
+    border-color 0.45s var(--ease-expo);
+}
+.btn:active { transform: scale(0.97); }
+
+/* Dunne hairlines */
+.hair { border-color: color-mix(in oklab, var(--color-den) 12%, transparent); }
+.hair-light { border-color: color-mix(in oklab, var(--color-duin-50) 16%, transparent); }
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

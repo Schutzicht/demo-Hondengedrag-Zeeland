@@ -1,0 +1,100 @@
+---
+import Base from "../layouts/Base.astro";
+import { about, site } from "../data/site";
+
+const values = [
+  { t: "Rustig", d: "Geen druk, geen haast. Verandering ontstaat in rust, niet in spanning." },
+  { t: "Respectvol", d: "Voor de hond en voor jou. Ik werk positief, nooit met dwang of angst." },
+  { t: "Met begrip", d: "Eerst snappen waarom, dan pas sturen. Inzicht boven correctie." },
+];
+---
+
+<Base title="Over Pieternel" headerTone="light" description="Pieternel van Haaften, hondengedragsconsulent in Zeeland. Dertig jaar zorgervaring, meerdere diploma's hondenpsychologie en een rustige, respectvolle benadering.">
+  <section class="bg-duin pt-36 pb-[clamp(3rem,7vw,5rem)] sm:pt-40">
+    <div class="mx-auto max-w-[88rem] px-5 sm:px-8">
+      <div class="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-16">
+        <div>
+          <p data-reveal class="text-[0.78rem] uppercase tracking-[0.26em] text-salie">Over Pieternel</p>
+          <h1 data-reveal style="--d:.06s" class="mt-6 max-w-[14ch] font-display text-[clamp(2.6rem,7vw,5.4rem)] leading-[0.95] text-den">
+            Eerst luisteren, altijd
+          </h1>
+          <p data-reveal style="--d:.12s" class="mt-7 max-w-[46ch] text-xl leading-relaxed text-den/80">
+            {about.lead}
+          </p>
+        </div>
+        <div class="reveal-media relative aspect-[4/5] overflow-hidden rounded-[2px]">
+          <img src="/images/real/pieternel-van-haaften.jpg" alt="Pieternel van Haaften met een jonge hond" class="h-full w-full object-cover object-[center_25%]" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-duin pb-[clamp(4rem,9vw,7rem)]">
+    <div class="mx-auto max-w-[88rem] px-5 sm:px-8">
+      <div class="grid gap-10 border-t border-den/10 pt-12 lg:grid-cols-[1fr_1.4fr] lg:gap-20">
+        <h2 data-reveal class="font-display text-[clamp(1.6rem,3.4vw,2.6rem)] leading-[1.06] text-den">
+          Van de zorg naar de hond
+        </h2>
+        <div class="flex flex-col gap-5 text-lg leading-relaxed text-den/75">
+          {about.body.map((p, i) => (
+            <p data-reveal style={`--d:${i * 0.06}s`}>{p}</p>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- waarden -->
+  <section class="bg-getij py-[clamp(4rem,10vw,7rem)] text-duin-50">
+    <div class="mx-auto max-w-[88rem] px-5 sm:px-8">
+      <div class="grid gap-px overflow-hidden rounded-[3px] bg-duin-50/10 sm:grid-cols-3">
+        {values.map((v, i) => (
+          <div data-reveal style={`--d:${i * 0.06}s`} class="bg-getij p-8 sm:p-10">
+            <span class="font-display text-sm text-klei-400">{String(i + 1).padStart(2, "0")}</span>
+            <h3 class="mt-3 font-display text-3xl">{v.t}</h3>
+            <p class="mt-3 leading-relaxed text-duin-50/70">{v.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- diploma's -->
+  <section class="bg-duin-100 py-[clamp(4.5rem,11vw,8rem)]">
+    <div class="mx-auto max-w-[88rem] px-5 sm:px-8">
+      <div class="flex flex-wrap items-end justify-between gap-6">
+        <div>
+          <p data-reveal class="text-[0.78rem] uppercase tracking-[0.26em] text-salie">Opleiding</p>
+          <h2 data-reveal style="--d:.06s" class="mt-5 max-w-[20ch] font-display text-[clamp(1.9rem,4.4vw,3rem)] leading-[1.04] text-den">
+            Onderbouwd, niet uit de losse pols
+          </h2>
+        </div>
+        <p data-reveal style="--d:.1s" class="max-w-[34ch] text-den/65">
+          Meerdere diploma's in hondenpsychologie en gedrag, naast jaren praktijk met de meest uiteenlopende honden.
+        </p>
+      </div>
+      <div class="mt-12 grid gap-5 sm:grid-cols-3">
+        {about.diplomas.map((d, i) => (
+          <div data-reveal style={`--d:${i * 0.06}s`} class="reveal-media aspect-[3/4] overflow-hidden rounded-[2px] border border-den/10 bg-duin">
+            <img src={d.src} alt={d.alt} class="h-full w-full object-cover" loading="lazy" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-duin py-[clamp(4.5rem,11vw,8rem)]">
+    <div class="mx-auto max-w-[88rem] px-5 text-center sm:px-8">
+      <h2 data-reveal class="mx-auto max-w-[22ch] font-display text-[clamp(2rem,5vw,3.4rem)] leading-[1.04] text-den">
+        Zullen we kennismaken?
+      </h2>
+      <p data-reveal style="--d:.06s" class="mx-auto mt-5 max-w-[46ch] text-den/70">
+        Ik werk door heel Zeeland: {site.region}
+      </p>
+      <a data-reveal style="--d:.1s" href="/contact" class="btn mt-8 bg-klei px-7 py-4 text-duin-50 hover:bg-klei-400">
+        Neem contact op
+      </a>
+    </div>
+  </section>
+</Base>

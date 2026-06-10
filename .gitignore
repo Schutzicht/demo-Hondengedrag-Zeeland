@@ -1,0 +1,18 @@
+# build output
+dist/
+.astro/
+
+# deps
+node_modules/
+
+# scrape working dir (raw source assets)
+_scrape/
+
+# env / secrets
+.env
+.env.production
+.DS_Store
+
+# editor
+.vscode/
+*.log

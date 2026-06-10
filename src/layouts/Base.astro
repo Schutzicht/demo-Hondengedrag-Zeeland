@@ -1,0 +1,155 @@
+---
+import "@fontsource-variable/bricolage-grotesque";
+import "@fontsource-variable/inter";
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { site } from "../data/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+  headerTone?: "light" | "dark"; // toon van de header boven de hero
+}
+
+const {
+  title,
+  description = "Hondengedragsbegeleiding in heel Zeeland. Rustig, respectvol en gericht op begrip. Consult aan huis, cursussen en groepswandelingen door Pieternel van Haaften.",
+  headerTone = "dark",
+} = Astro.props;
+
+const fullTitle = title
+  ? `${title} — ${site.name}`
+  : `${site.name} — ${site.tagline}`;
+---
+
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#13302b" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="/images/art/zeeland-ruimte.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href={Astro.url.href} />
+    <!-- pre-paint: motion- en js-vlaggen zodat content nooit verborgen blijft zonder JS -->
+    <script is:inline>
+      (function () {
+        const d = document.documentElement;
+        d.classList.add("js");
+        try {
+          if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            d.classList.add("rm");
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-full focus:bg-den focus:px-5 focus:py-3 focus:text-duin-50"
+      >Naar inhoud</a
+    >
+    <Header tone={headerTone} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      import Lenis from "lenis";
+      import { gsap } from "gsap";
+      import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+      const reduce = document.documentElement.classList.contains("rm");
+      gsap.registerPlugin(ScrollTrigger);
+
+      // ---- Smooth scroll (Lenis) gekoppeld aan GSAP ----
+      if (!reduce) {
+        const lenis = new Lenis({
+          duration: 1.1,
+          easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          smoothWheel: true,
+        });
+        (window as any).lenis = lenis;
+        lenis.on("scroll", ScrollTrigger.update);
+        gsap.ticker.add((time: number) => lenis.raf(time * 1000));
+        gsap.ticker.lagSmoothing(0);
+      }
+
+      // ---- Reveal-systeem ----
+      const revealEls = document.querySelectorAll<HTMLElement>(
+        "[data-reveal], .reveal-media, .words"
+      );
+      if (revealEls.length) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              if (e.isIntersecting) {
+                e.target.classList.add("in");
+                io.unobserve(e.target);
+              }
+            }
+          },
+          { rootMargin: "0px 0px -8% 0px", threshold: 0.12 }
+        );
+        revealEls.forEach((el) => io.observe(el));
+      }
+
+      // ---- Header-status bij scroll ----
+      const header = document.getElementById("siteheader");
+      if (header) {
+        const setState = () => {
+          const y = window.scrollY;
+          header.classList.toggle("is-scrolled", y > 40);
+        };
+        setState();
+        window.addEventListener("scroll", setState, { passive: true });
+      }
+
+      // ---- Mobiel menu ----
+      const menuBtn = document.getElementById("menu-toggle");
+      const menu = document.getElementById("mobile-menu");
+      const openMenu = (open: boolean) => {
+        if (!menu || !menuBtn) return;
+        menu.classList.toggle("is-open", open);
+        menuBtn.setAttribute("aria-expanded", String(open));
+        document.body.classList.toggle("overflow-hidden", open);
+        const l = (window as any).lenis;
+        if (l) open ? l.stop() : l.start();
+      };
+      menuBtn?.addEventListener("click", () =>
+        openMenu(!menu?.classList.contains("is-open"))
+      );
+      menu?.querySelectorAll("a").forEach((a) =>
+        a.addEventListener("click", () => openMenu(false))
+      );
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") openMenu(false);
+      });
+
+      // ---- Magnetische knoppen (desktop, fine pointer) ----
+      if (!reduce && window.matchMedia("(pointer: fine)").matches) {
+        document.querySelectorAll<HTMLElement>("[data-magnetic]").forEach((el) => {
+          const strength = 0.28;
+          el.addEventListener("mousemove", (ev) => {
+            const r = el.getBoundingClientRect();
+            const x = ev.clientX - (r.left + r.width / 2);
+            const y = ev.clientY - (r.top + r.height / 2);
+            el.style.transform = `translate(${x * strength}px, ${y * strength}px)`;
+          });
+          el.addEventListener("mouseleave", () => {
+            el.style.transform = "translate(0,0)";
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+---
+import Base from "../layouts/Base.astro";
+import { site } from "../data/site";
+
+const clauses = [
+  { t: "Afspraken", d: "Een afspraak is definitief zodra die per app, telefoon of mail is bevestigd. Kun je niet, laat het dan minimaal 24 uur van tevoren weten." },
+  { t: "Annulering", d: "Bij annulering binnen 24 uur breng ik de gereserveerde tijd in rekening. Bij overmacht zoeken we samen naar een nieuw moment." },
+  { t: "Betaling", d: "Betaling gebeurt na het consult of voorafgaand aan een cursus, tenzij anders afgesproken. Tarieven staan vermeld op de tarievenpagina." },
+  { t: "Aansprakelijkheid", d: "Je blijft als eigenaar verantwoordelijk voor je hond. Advies wordt naar beste kunnen gegeven, garanties op gedrag zijn niet mogelijk." },
+  { t: "Gezondheid", d: "Honden zijn gezond en ingeënt. Bij twijfel over gezondheid of gedrag dat onveilig kan zijn, overleggen we eerst." },
+  { t: "Privacy", d: "Je gegevens gebruik ik uitsluitend voor contact en begeleiding. Ze worden niet gedeeld met derden." },
+];
+---
+
+<Base title="Algemene voorwaarden" headerTone="light" description="Algemene voorwaarden van Hondengedrag Zeeland.">
+  <section class="bg-duin pt-36 pb-[clamp(4rem,10vw,7rem)] sm:pt-40">
+    <div class="mx-auto max-w-[72rem] px-5 sm:px-8">
+      <p data-reveal class="text-[0.78rem] uppercase tracking-[0.26em] text-salie">Algemene voorwaarden</p>
+      <h1 data-reveal style="--d:.06s" class="mt-6 max-w-[20ch] font-display text-[clamp(2.4rem,6vw,4.4rem)] leading-[0.98] text-den">
+        Duidelijke afspraken, voor ons allebei
+      </h1>
+      <p data-reveal style="--d:.12s" class="mt-6 max-w-[52ch] text-den/65">
+        Onderstaande voorwaarden gelden voor alle diensten van Hondengedrag Zeeland. Heb je een vraag over een van deze punten, stel die gerust.
+      </p>
+
+      <div class="mt-12 grid gap-px overflow-hidden rounded-[3px] border border-den/10 bg-den/10 sm:grid-cols-2">
+        {clauses.map((c, i) => (
+          <div data-reveal style={`--d:${i * 0.04}s`} class="bg-duin p-7 sm:p-8">
+            <span class="font-display text-sm text-klei">{String(i + 1).padStart(2, "0")}</span>
+            <h2 class="mt-2 font-display text-xl text-den">{c.t}</h2>
+            <p class="mt-2 text-sm leading-relaxed text-den/65">{c.d}</p>
+          </div>
+        ))}
+      </div>
+
+      <p class="mt-10 text-xs text-den/40">
+        Dit is demo-content ter illustratie. KvK {site.kvk} · BTW {site.btw}.
+      </p>
+    </div>
+  </section>
+</Base>

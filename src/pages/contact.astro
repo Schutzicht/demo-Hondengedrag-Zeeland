@@ -1,0 +1,160 @@
+---
+import Base from "../layouts/Base.astro";
+import { site, services } from "../data/site";
+---
+
+<Base title="Contact" headerTone="light" description="Neem contact op met Hondengedrag Zeeland. Bel, app of mail Pieternel van Haaften voor een rustige kennismaking.">
+  <section class="bg-duin pt-36 pb-[clamp(3.5rem,9vw,7rem)] sm:pt-40">
+    <div class="mx-auto max-w-[88rem] px-5 sm:px-8">
+      <p data-reveal class="text-[0.78rem] uppercase tracking-[0.26em] text-salie">Contact</p>
+      <h1 data-reveal style="--d:.06s" class="mt-6 max-w-[15ch] font-display text-[clamp(2.6rem,7vw,5.6rem)] leading-[0.95] text-den">
+        Laten we rustig beginnen
+      </h1>
+      <p data-reveal style="--d:.12s" class="mt-7 max-w-[48ch] text-lg leading-relaxed text-den/70">
+        Vertel kort wat er speelt. Vaak weten we in een paar minuten al of, en hoe, ik kan helpen. Bellen of appen mag altijd.
+      </p>
+
+      <div class="mt-14 grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
+        <!-- directe opties -->
+        <div class="flex flex-col gap-3">
+          <a href={site.whatsapp} data-reveal class="contact-card group" >
+            <span class="contact-ic"><svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.2-.7-2.7-1.1-4.4-3.8-4.5-4-.1-.2-1-1.4-1-2.6s.6-1.8.9-2.1c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.1.1.3 0 .5l-.4.6c-.2.2-.3.4-.1.6.6 1 1.3 1.6 2.2 2.1.2.1.4.1.5-.1l.6-.8c.2-.2.3-.2.6-.1l1.9.9c.3.1.4.2.5.3.1.3.1.9-.1 1.6Z"/></svg></span>
+            <div>
+              <p class="text-xs uppercase tracking-[0.16em] text-den/45">WhatsApp</p>
+              <p class="font-display text-xl text-den">Stuur een bericht</p>
+            </div>
+            <svg class="ml-auto h-5 w-5 text-den/35 transition-transform duration-400 group-hover:translate-x-1 group-hover:text-klei" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href={site.phoneHref} data-reveal style="--d:.05s" class="contact-card group">
+            <span class="contact-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-5 w-5"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg></span>
+            <div>
+              <p class="text-xs uppercase tracking-[0.16em] text-den/45">Bellen</p>
+              <p class="font-display text-xl text-den">{site.phoneDisplay}</p>
+            </div>
+            <svg class="ml-auto h-5 w-5 text-den/35 transition-transform duration-400 group-hover:translate-x-1 group-hover:text-klei" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href={`mailto:${site.email}`} data-reveal style="--d:.1s" class="contact-card group">
+            <span class="contact-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-5 w-5"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+            <div>
+              <p class="text-xs uppercase tracking-[0.16em] text-den/45">Mailen</p>
+              <p class="font-display text-lg text-den break-all">{site.email}</p>
+            </div>
+            <svg class="ml-auto h-5 w-5 text-den/35 transition-transform duration-400 group-hover:translate-x-1 group-hover:text-klei" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+
+          <div data-reveal class="mt-6 rounded-[3px] border border-den/10 bg-duin-100 p-6">
+            <p class="text-xs uppercase tracking-[0.16em] text-den/45">Werkgebied</p>
+            <p class="mt-2 leading-relaxed text-den/75">{site.region}</p>
+            <p class="mt-4 text-xs text-den/45">KvK {site.kvk} · BTW {site.btw}</p>
+          </div>
+        </div>
+
+        <!-- formulier -->
+        <div data-reveal style="--d:.08s">
+          <form id="contactform" class="rounded-[4px] border border-den/10 bg-duin-50 p-6 sm:p-9" novalidate>
+            <div class="grid gap-5 sm:grid-cols-2">
+              <label class="field sm:col-span-1">
+                <span>Je naam</span>
+                <input type="text" name="naam" required autocomplete="name" placeholder="Voor- en achternaam" />
+              </label>
+              <label class="field sm:col-span-1">
+                <span>Telefoon of e-mail</span>
+                <input type="text" name="contact" required placeholder="Waarop ik je kan bereiken" />
+              </label>
+              <label class="field sm:col-span-1">
+                <span>Je hond <small>(optioneel)</small></span>
+                <input type="text" name="hond" placeholder="Naam en ras" />
+              </label>
+              <label class="field sm:col-span-1">
+                <span>Waar gaat het over?</span>
+                <select name="onderwerp">
+                  <option value="">Kies een onderwerp</option>
+                  {services.map((s) => <option value={s.title}>{s.title}</option>)}
+                  <option value="Probleemgedrag">Probleemgedrag</option>
+                  <option value="Anders">Iets anders</option>
+                </select>
+              </label>
+              <label class="field sm:col-span-2">
+                <span>Vertel kort wat er speelt</span>
+                <textarea name="bericht" rows="5" required placeholder="Sinds wanneer, in welke situaties, wat heb je al geprobeerd?"></textarea>
+              </label>
+            </div>
+            <div class="mt-6 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+              <button type="submit" class="btn bg-den px-7 py-4 text-duin-50 transition-colors hover:bg-getij">
+                Verstuur bericht
+              </button>
+              <p class="text-xs text-den/45">Je gegevens gebruik ik alleen om te reageren. Niets meer.</p>
+            </div>
+            <p id="form-error" class="mt-4 hidden text-sm text-klei-600">Vul je naam, contactgegeven en bericht even in.</p>
+          </form>
+
+          <div id="form-success" class="hidden rounded-[4px] border border-den/10 bg-duin-50 p-9 text-center">
+            <span class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-klei text-duin-50">
+              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </span>
+            <h2 class="mt-5 font-display text-2xl text-den">Bedankt, het staat klaar</h2>
+            <p class="mx-auto mt-3 max-w-[36ch] text-den/65">In de live site komt dit bericht direct bij Pieternel binnen. Voor nu mag je dit als demo zien, bel of app gerust voor een echte afspraak.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .contact-card {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      border-radius: 3px;
+      border: 1px solid color-mix(in oklab, var(--color-den) 10%, transparent);
+      background: var(--color-duin-100);
+      padding: 1.1rem 1.3rem;
+      transition: border-color 0.4s var(--ease-expo), transform 0.4s var(--ease-expo);
+    }
+    .contact-card:hover { border-color: color-mix(in oklab, var(--color-klei) 60%, transparent); transform: translateY(-2px); }
+    .contact-ic {
+      display: flex; height: 2.75rem; width: 2.75rem; flex-shrink: 0;
+      align-items: center; justify-content: center; border-radius: 999px;
+      background: var(--color-duin); color: var(--color-den);
+    }
+    .field { display: flex; flex-direction: column; gap: 0.5rem; }
+    .field > span { font-size: 0.82rem; font-weight: 560; color: color-mix(in oklab, var(--color-den) 80%, transparent); }
+    .field small { font-weight: 400; color: color-mix(in oklab, var(--color-den) 45%, transparent); }
+    .field input, .field select, .field textarea {
+      width: 100%;
+      border-radius: 3px;
+      border: 1px solid color-mix(in oklab, var(--color-den) 16%, transparent);
+      background: var(--color-duin-50);
+      padding: 0.8rem 0.95rem;
+      font-size: 0.98rem;
+      color: var(--color-den);
+      transition: border-color 0.3s var(--ease-expo), box-shadow 0.3s var(--ease-expo);
+    }
+    .field input::placeholder, .field textarea::placeholder { color: color-mix(in oklab, var(--color-den) 38%, transparent); }
+    .field input:focus, .field select:focus, .field textarea:focus {
+      outline: none;
+      border-color: var(--color-klei);
+      box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-klei) 18%, transparent);
+    }
+    .field textarea { resize: vertical; }
+  </style>
+
+  <script>
+    const form = document.getElementById("contactform") as HTMLFormElement | null;
+    const success = document.getElementById("form-success");
+    const err = document.getElementById("form-error");
+    form?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const ok = ["naam", "contact", "bericht"].every((k) => String(data.get(k) || "").trim().length > 1);
+      if (!ok) {
+        err?.classList.remove("hidden");
+        return;
+      }
+      err?.classList.add("hidden");
+      form.classList.add("hidden");
+      success?.classList.remove("hidden");
+      success?.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+  </script>
+</Base>

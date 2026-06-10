@@ -1,0 +1,165 @@
+---
+import { nav, site } from "../data/site";
+const path = Astro.url.pathname;
+---
+
+<header id="siteheader">
+  <div class="mx-auto flex max-w-[80rem] items-center px-4 pt-4 sm:px-6 sm:pt-5">
+    <div class="pill flex w-full items-center justify-between gap-4 py-2.5 pl-5 pr-2.5 sm:py-3 sm:pl-6 sm:pr-3">
+      <!-- wordmark -->
+      <a href="/" class="logo press shrink-0" aria-label={`${site.name}, naar home`}>
+        <span class="block font-display text-[1.02rem] font-semibold leading-none tracking-[-0.03em] text-den sm:text-[1.1rem]">
+          Hondengedrag<span class="text-klei">&nbsp;Zeeland</span>
+        </span>
+      </a>
+
+      <nav class="hidden items-center gap-7 lg:flex" aria-label="Hoofdmenu">
+        {nav.map((item) => (
+          <a
+            href={item.href}
+            class:list={["nav-link", path === item.href && "is-current"]}
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+
+      <div class="flex items-center gap-1.5">
+        <a
+          href="/contact"
+          data-magnetic
+          class="press hidden rounded-full bg-den px-5 py-2.5 text-[0.88rem] font-semibold tracking-[-0.01em] text-duin-50 transition-colors duration-400 hover:bg-klei sm:inline-flex"
+        >
+          Plan kennismaking
+        </a>
+        <button
+          id="menu-toggle"
+          class="relative z-[160] flex h-11 w-11 items-center justify-center text-den lg:hidden"
+          aria-label="Menu openen"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <span class="hamb" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Volledig scherm mobiel menu -->
+<div id="mobile-menu" aria-hidden="true">
+  <nav class="flex h-full flex-col justify-between px-6 pb-12 pt-32" aria-label="Mobiel menu">
+    <ul class="flex flex-col gap-1.5">
+      {nav.map((item, i) => (
+        <li>
+          <a
+            href={item.href}
+            class="mm-link block py-2 font-display text-[2.5rem] font-semibold leading-tight tracking-[-0.03em] text-duin-50"
+            style={`--i:${i}`}
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+    <div class="mm-foot flex flex-col gap-2 text-duin-50/70">
+      <a href={site.phoneHref} class="link-underline w-fit text-lg text-duin-50">{site.phoneDisplay}</a>
+      <a href={`mailto:${site.email}`} class="link-underline w-fit text-sm">{site.email}</a>
+      <span class="mt-2 text-xs uppercase tracking-[0.22em] text-duin-50/45">Hondengedrag Zeeland</span>
+    </div>
+  </nav>
+</div>
+
+<style>
+  #siteheader {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 150;
+  }
+  .pill {
+    background: color-mix(in oklab, var(--color-duin) 68%, transparent);
+    -webkit-backdrop-filter: saturate(1.7) blur(16px);
+    backdrop-filter: saturate(1.7) blur(16px);
+    border: 1px solid color-mix(in oklab, var(--color-den) 9%, transparent);
+    border-radius: 999px;
+    box-shadow: 0 6px 22px -16px rgba(20, 30, 25, 0.4);
+    transition:
+      background-color 0.5s var(--ease-expo),
+      box-shadow 0.5s var(--ease-expo),
+      border-color 0.5s var(--ease-expo);
+  }
+  #siteheader.is-scrolled .pill {
+    background: color-mix(in oklab, var(--color-duin) 86%, transparent);
+    border-color: color-mix(in oklab, var(--color-den) 12%, transparent);
+    box-shadow: 0 16px 40px -20px rgba(20, 30, 25, 0.45);
+  }
+
+  .nav-link {
+    position: relative;
+    font-size: 0.92rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: color-mix(in oklab, var(--color-den) 78%, transparent);
+    padding: 0.3rem 0;
+    transition: color 0.3s var(--ease-expo);
+  }
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: -1px;
+    height: 1.5px;
+    background: var(--color-klei);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s var(--ease-expo);
+  }
+  .nav-link:hover { color: var(--color-den); }
+  .nav-link:hover::after,
+  .nav-link.is-current::after { transform: scaleX(1); }
+  .nav-link.is-current { color: var(--color-den); }
+
+  /* Hamburger */
+  .hamb, .hamb::before, .hamb::after {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 1.7px;
+    background: currentColor;
+    border-radius: 2px;
+    transition: transform 0.4s var(--ease-expo), opacity 0.3s, background-color 0.4s;
+  }
+  .hamb { position: relative; }
+  .hamb::before { position: absolute; top: -7px; left: 0; }
+  .hamb::after { position: absolute; top: 7px; left: 0; }
+  #menu-toggle[aria-expanded="true"] .hamb { background: transparent; }
+  #menu-toggle[aria-expanded="true"] .hamb::before { transform: translateY(7px) rotate(45deg); background: var(--color-duin-50); }
+  #menu-toggle[aria-expanded="true"] .hamb::after { transform: translateY(-7px) rotate(-45deg); background: var(--color-duin-50); }
+
+  /* Mobiel menu */
+  #mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 140;
+    background: var(--color-getij);
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path 0.7s var(--ease-expo);
+    pointer-events: none;
+  }
+  #mobile-menu.is-open { clip-path: inset(0 0 0 0); pointer-events: auto; }
+  .mm-link {
+    transform: translateY(120%);
+    opacity: 0;
+    transition: transform 0.7s var(--ease-expo), opacity 0.7s var(--ease-expo), color 0.3s;
+    transition-delay: calc(0.05s * var(--i) + 0.12s);
+    display: inline-block;
+  }
+  .mm-link:hover { color: var(--color-klei); }
+  #mobile-menu.is-open .mm-link { transform: none; opacity: 1; }
+  .mm-foot { opacity: 0; transition: opacity 0.6s var(--ease-expo) 0.45s; }
+  #mobile-menu.is-open .mm-foot { opacity: 1; }
+
+  @media (prefers-reduced-motion: reduce) {
+    #mobile-menu, .mm-link { transition: none; }
+    .mm-link { transform: none; opacity: 1; }
+  }
+</style>

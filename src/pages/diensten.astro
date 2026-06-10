@@ -1,0 +1,88 @@
+---
+import Base from "../layouts/Base.astro";
+import { services, site } from "../data/site";
+---
+
+<Base title="Diensten" headerTone="light" description="Consult aan huis, online theorieles, puppy- en jonge hondencursus en groepswandelingen in heel Zeeland.">
+  <!-- pagina-hero -->
+  <section class="bg-duin pt-36 pb-[clamp(3rem,7vw,6rem)] sm:pt-40">
+    <div class="mx-auto max-w-[88rem] px-5 sm:px-8">
+      <p data-reveal class="text-[0.78rem] uppercase tracking-[0.26em] text-salie">Diensten</p>
+      <h1 data-reveal style="--d:.06s" class="mt-6 max-w-[18ch] font-display text-[clamp(2.6rem,7vw,5.6rem)] leading-[0.96] text-den">
+        Begeleiding die past bij jullie vraag
+      </h1>
+      <p data-reveal style="--d:.12s" class="mt-7 max-w-[52ch] text-lg leading-relaxed text-den/70">
+        Of je nu een pup in huis haalt, met probleemgedrag worstelt of gewoon samen wilt groeien: er is altijd een rustige, passende manier om te beginnen.
+      </p>
+      <div data-reveal style="--d:.16s" class="mt-9 flex flex-wrap gap-2">
+        {services.map((s) => (
+          <a href={`#${s.slug}`} class="press rounded-full border border-den/15 px-4 py-2 text-sm text-den/75 transition-colors hover:border-klei hover:text-den">
+            {s.title}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- diensten -->
+  <div class="bg-duin pb-[clamp(4rem,10vw,8rem)]">
+    {services.map((s, i) => (
+      <section id={s.slug} class="scroll-mt-28 border-t border-den/10 py-[clamp(3.5rem,8vw,7rem)]">
+        <div class={`mx-auto grid max-w-[88rem] items-center gap-10 px-5 sm:px-8 lg:grid-cols-2 lg:gap-16 ${i % 2 === 1 ? "lg:[&>div:first-child]:order-2" : ""}`}>
+          <div class="reveal-media relative aspect-[4/3] overflow-hidden rounded-[2px]">
+            <img src={s.image} alt={s.imageAlt} class="h-full w-full object-cover" loading="lazy" />
+            <span class="absolute left-5 top-5 rounded-full bg-duin-50/90 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.15em] text-den">{s.index}</span>
+          </div>
+
+          <div>
+            <p data-reveal class="text-[0.78rem] uppercase tracking-[0.24em] text-klei">{s.kicker}</p>
+            <h2 data-reveal style="--d:.06s" class="mt-4 font-display text-[clamp(1.9rem,4.4vw,3.2rem)] leading-[1.02] text-den">{s.title}</h2>
+            <p data-reveal style="--d:.1s" class="mt-5 text-lg leading-relaxed text-den/80">{s.short}</p>
+            {s.body.map((p, j) => (
+              <p data-reveal style={`--d:${0.14 + j * 0.05}s`} class="mt-4 leading-relaxed text-den/65">{p}</p>
+            ))}
+
+            <ul data-reveal class="mt-7 grid gap-x-6 gap-y-2.5 sm:grid-cols-2">
+              {s.points.map((pt) => (
+                <li class="flex items-start gap-2.5 text-sm text-den/75">
+                  <svg class="mt-1 h-3.5 w-3.5 shrink-0 text-klei" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                  {pt}
+                </li>
+              ))}
+            </ul>
+
+            <div data-reveal class="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-den/10 pt-6">
+              <div>
+                <p class="text-xs uppercase tracking-[0.18em] text-den/45">Tarief</p>
+                <p class="mt-1 font-display text-2xl text-den">{s.price}</p>
+              </div>
+              <div>
+                <p class="text-xs uppercase tracking-[0.18em] text-den/45">Duur</p>
+                <p class="mt-1 text-den/80">{s.duration}</p>
+              </div>
+              <a href="/contact" class="press ml-auto inline-flex items-center gap-2 rounded-full bg-den px-6 py-3.5 text-sm font-semibold text-duin-50 transition-colors hover:bg-getij">
+                Plan dit
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    ))}
+  </div>
+
+  <!-- afsluiter -->
+  <section class="bg-duin-100 py-[clamp(4rem,9vw,7rem)]">
+    <div class="mx-auto max-w-[88rem] px-5 text-center sm:px-8">
+      <h2 data-reveal class="mx-auto max-w-[20ch] font-display text-[clamp(1.9rem,4.6vw,3.2rem)] leading-[1.05] text-den">
+        Niet zeker welke vorm past?
+      </h2>
+      <p data-reveal style="--d:.06s" class="mx-auto mt-5 max-w-[46ch] text-den/70">
+        Bel of app me gerust. In een kort gesprek weten we samen snel waar we het beste kunnen beginnen.
+      </p>
+      <a data-reveal style="--d:.1s" href="/contact" class="btn mt-8 bg-klei px-7 py-4 text-duin-50 hover:bg-klei-400">
+        Neem contact op
+      </a>
+    </div>
+  </section>
+</Base>

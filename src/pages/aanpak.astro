@@ -1,0 +1,107 @@
+---
+import Base from "../layouts/Base.astro";
+import { steps } from "../data/site";
+
+const outcomes = [
+  { t: "Je begrijpt je hond", d: "Je weet wat gedrag betekent en ziet het aankomen, in plaats van het te moeten bestrijden." },
+  { t: "Rust in huis", d: "Minder spanning, minder geblaf, minder gedoe. Een hond die kan ontspannen omdat jij dat ook kunt." },
+  { t: "Vertrouwen op de lijn", d: "Een wandeling die geen gevecht meer is. Verbinding in plaats van controle." },
+  { t: "Het blijft werken", d: "Geen trucjes die verwateren, maar inzicht dat je houdt. Voor deze hond en de volgende." },
+];
+---
+
+<Base title="Aanpak" headerTone="dark" description="Mijn werkwijze in vier rustige stappen: luisteren, lezen, begrijpen en begeleiden. Van een strakke lijn naar een losse.">
+  <!-- hero -->
+  <section class="relative flex min-h-[72svh] items-end overflow-hidden bg-getij text-duin-50">
+    <div class="absolute inset-0" style="background-image:url('/images/art/kust-ochtend.png');background-size:cover;background-position:center" aria-hidden="true"></div>
+    <div class="absolute inset-0" style="background:linear-gradient(180deg,rgba(19,48,43,.78),rgba(19,48,43,.35) 45%,rgba(19,48,43,.95))" aria-hidden="true"></div>
+    <div class="relative z-10 mx-auto w-full max-w-[88rem] px-5 py-20 sm:px-8">
+      <p data-reveal class="text-[0.78rem] uppercase tracking-[0.26em] text-klei-400">De aanpak</p>
+      <h1 data-reveal style="--d:.06s" class="mt-6 max-w-[16ch] font-display text-[clamp(2.8rem,8vw,6rem)] leading-[0.95]">
+        Eerst begrijpen. Dan veranderen.
+      </h1>
+      <p data-reveal style="--d:.12s" class="mt-7 max-w-[50ch] text-lg leading-relaxed text-duin-50/85">
+        Ik werk niet met dwang of trucjes, maar met inzicht. In vier rustige stappen gaat de spanning eraf, bij jou en bij je hond.
+      </p>
+    </div>
+  </section>
+
+  <!-- filosofie -->
+  <section class="bg-duin py-[clamp(4.5rem,11vw,8rem)]">
+    <div class="mx-auto max-w-[88rem] px-5 sm:px-8">
+      <div class="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:gap-20">
+        <h2 data-reveal class="font-display text-[clamp(1.8rem,4vw,3rem)] leading-[1.05] text-den">
+          Achter gedrag zit altijd een reden.
+        </h2>
+        <div class="flex flex-col gap-5 self-end text-lg leading-relaxed text-den/75">
+          <p data-reveal style="--d:.06s">
+            Een hond doet niets zonder aanleiding. Blaffen, trekken, uitvallen of juist terugtrekken: het is communicatie. De vraag is niet hoe je het stopt, maar wat je hond ermee zegt.
+          </p>
+          <p data-reveal style="--d:.12s">
+            Zodra die vraag beantwoord is, valt de rest op zijn plek. Je hoeft geen strijd te voeren tegen je eigen hond. Je leert hem verstaan, en dan kan de lijn los.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- de vier stappen met spanning-meter -->
+  <section class="bg-duin-100 py-[clamp(4rem,10vw,8rem)]">
+    <div class="mx-auto max-w-[88rem] px-5 sm:px-8">
+      <ol class="flex flex-col gap-5">
+        {steps.map((step, i) => (
+          <li data-reveal style={`--d:${i * 0.05}s`} class="grid gap-6 rounded-[3px] bg-duin p-7 sm:grid-cols-[1fr_1.4fr] sm:gap-12 sm:p-10">
+            <div>
+              <div class="flex items-baseline gap-4">
+                <span class="font-display text-[clamp(2.4rem,5vw,3.6rem)] leading-none text-klei">{step.n}</span>
+                <h3 class="font-display text-[clamp(1.6rem,3vw,2.4rem)] leading-tight text-den">{step.title}</h3>
+              </div>
+              <!-- spanning-meter -->
+              <div class="mt-6">
+                <div class="flex justify-between text-[0.7rem] uppercase tracking-[0.16em] text-den/45">
+                  <span>Spanning</span>
+                  <span>{step.tension > 0.6 ? "Strak" : step.tension > 0.25 ? "Losser" : "Los"}</span>
+                </div>
+                <div class="mt-2 h-1.5 overflow-hidden rounded-full bg-den/10">
+                  <div class="meter h-full rounded-full bg-klei" style={`--w:${Math.round(step.tension * 100)}%`}></div>
+                </div>
+              </div>
+            </div>
+            <div class="self-center">
+              <p class="font-display text-xl text-den sm:text-2xl">{step.line}</p>
+              <p class="mt-3 leading-relaxed text-den/70">{step.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- wat het oplevert -->
+  <section class="bg-duin py-[clamp(4.5rem,11vw,8rem)]">
+    <div class="mx-auto max-w-[88rem] px-5 sm:px-8">
+      <p data-reveal class="text-[0.78rem] uppercase tracking-[0.26em] text-salie">Wat het oplevert</p>
+      <h2 data-reveal style="--d:.06s" class="mt-5 max-w-[20ch] font-display text-[clamp(1.9rem,4.4vw,3.2rem)] leading-[1.03] text-den">
+        Geen afgericht trucje, maar een hond die je verstaat
+      </h2>
+      <div class="mt-12 grid gap-px overflow-hidden rounded-[3px] border border-den/10 bg-den/10 sm:grid-cols-2">
+        {outcomes.map((o, i) => (
+          <div data-reveal style={`--d:${i * 0.05}s`} class="bg-duin p-8">
+            <span class="font-display text-sm text-klei">{String(i + 1).padStart(2, "0")}</span>
+            <h3 class="mt-3 font-display text-2xl text-den">{o.t}</h3>
+            <p class="mt-2 leading-relaxed text-den/65">{o.d}</p>
+          </div>
+        ))}
+      </div>
+      <div class="mt-12 text-center">
+        <a data-reveal href="/contact" class="btn bg-klei px-7 py-4 text-duin-50 hover:bg-klei-400">Begin met een kennismaking</a>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .meter { width: 0; animation: grow 1.1s var(--ease-expo) forwards; }
+    @keyframes grow { to { width: var(--w); } }
+    @media (prefers-reduced-motion: reduce) { .meter { animation: none; width: var(--w); } }
+  </style>
+</Base>

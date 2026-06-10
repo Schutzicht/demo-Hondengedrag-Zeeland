@@ -1,0 +1,373 @@
+---
+import Base from "../layouts/Base.astro";
+import { site, services, steps, signals } from "../data/site";
+
+const heroWords = ["Achter", "elk", "gedrag", "zit", "een", "reden."];
+---
+
+<Base headerTone="dark">
+  <!-- ============ HERO ============ -->
+  <section class="hero relative flex min-h-[100svh] items-center overflow-hidden bg-getij">
+    <div class="hero-media absolute inset-0">
+      <img
+        src="/images/art/zeeland-ruimte.png"
+        alt="Wijde Zeeuwse kust bij dageraad, duingras en getij"
+        class="kenburns h-full w-full object-cover object-center"
+        fetchpriority="high"
+      />
+      <div class="absolute inset-0" style="background:linear-gradient(80deg, rgba(15,39,34,.88) 0%, rgba(15,39,34,.44) 40%, rgba(15,39,34,0) 73%)"></div>
+      <div class="absolute inset-0" style="background:linear-gradient(180deg, rgba(15,39,34,.32) 0%, transparent 26%, transparent 50%, rgba(15,39,34,.86) 100%)"></div>
+    </div>
+
+    <div class="relative z-10 mx-auto w-full max-w-[88rem] px-5 py-20 sm:px-8">
+      <p data-reveal class="mb-6 flex items-center gap-3 text-[0.78rem] uppercase tracking-[0.28em] text-duin-50/80">
+        <span class="inline-block h-px w-9 bg-klei"></span>
+        {site.role} · Heel Zeeland
+      </p>
+      <h1 class="words display max-w-[14ch] font-display text-[clamp(2.2rem,8.4vw,7.4rem)] leading-[0.98] text-duin-50">
+        {heroWords.map((w, i) => (
+          <span class="word" style={`--d:${0.16 + i * 0.07}s`}><span>{w}{i < heroWords.length - 1 ? " " : ""}</span></span>
+        ))}
+      </h1>
+      <p data-reveal style="--d:.5s" class="mt-7 max-w-[44ch] text-lg leading-relaxed text-duin-50/85 sm:text-xl">
+        {site.intro}
+      </p>
+      <div data-reveal style="--d:.62s" class="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+        <a href="/contact" data-magnetic class="btn justify-center bg-klei px-7 py-4 text-duin-50 hover:bg-klei-400">
+          Plan een kennismaking
+        </a>
+        <a href="#aanpak" class="btn justify-center border border-duin-50/30 px-7 py-4 text-duin-50 hover:bg-duin-50/10">
+          Zo werk ik
+        </a>
+      </div>
+    </div>
+
+    <div class="pointer-events-none absolute inset-x-0 bottom-7 z-10 mx-auto flex w-full max-w-[88rem] items-center gap-3 px-5 text-duin-50/55 sm:px-8">
+      <span class="scroll-cue inline-block h-9 w-px bg-duin-50/40"></span>
+      <span class="text-xs uppercase tracking-[0.2em]">Scroll, rustig aan</span>
+    </div>
+  </section>
+
+  <!-- ============ MANIFEST ============ -->
+  <section class="bg-duin py-[clamp(5rem,12vw,9rem)]">
+    <div class="mx-auto max-w-[88rem] px-5 sm:px-8">
+      <div class="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
+        <div>
+          <p data-reveal class="text-[0.78rem] uppercase tracking-[0.26em] text-salie">Gedrag is communicatie</p>
+          <h2 data-reveal style="--d:.06s" class="mt-6 font-display text-[clamp(2rem,4.6vw,3.5rem)] leading-[1.04] text-den">
+            Een hond die blaft, trekt of uitvalt is niet stout. Hij vertelt iets.
+          </h2>
+        </div>
+        <div class="flex flex-col gap-6 self-end text-lg leading-relaxed text-den/75">
+          <p data-reveal style="--d:.1s">
+            De meeste hondentrainingen werken aan het gedrag zelf: afleren, corrigeren, belonen. Ik kijk een stap eerder. Naar de reden eronder. Want pas als je begrijpt waaróm je hond reageert, kun je samen iets veranderen dat blijft.
+          </p>
+          <p data-reveal style="--d:.16s">
+            Geen strak schema en geen trucjes. Wel rust, ruimte en een manier van kijken die je daarna nooit meer verleert.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DE STILLE TAAL (interactief) ============ -->
+  <section class="relative bg-duin-100 py-[clamp(5rem,12vw,9rem)]">
+    <div class="mx-auto max-w-[88rem] px-5 sm:px-8">
+      <div class="grid gap-12 lg:grid-cols-2 lg:gap-20">
+        <!-- beeld -->
+        <div class="lg:sticky lg:top-24 lg:self-start">
+          <div class="reveal-media relative aspect-[4/5] overflow-hidden rounded-[2px]">
+            <img src="/images/real/pup-of-herplaatser.jpg" alt="Rustige hond, ontspannen lichaamstaal" class="h-full w-full object-cover" />
+            <div class="absolute inset-0" style="background:linear-gradient(180deg,transparent 55%,rgba(28,39,35,.5))"></div>
+            <p class="absolute bottom-5 left-5 right-5 font-display text-2xl text-duin-50">
+              Een hond praat de hele dag tegen je. Alleen niet met woorden.
+            </p>
+          </div>
+        </div>
+
+        <!-- lezer -->
+        <div id="stille-taal" class="state-calm">
+          <p data-reveal class="text-[0.78rem] uppercase tracking-[0.26em] text-salie">De stille taal</p>
+          <h2 data-reveal style="--d:.06s" class="mt-5 max-w-[18ch] font-display text-[clamp(1.9rem,4.4vw,3.2rem)] leading-[1.03] text-den">
+            Leer je hond lezen
+          </h2>
+          <p data-reveal style="--d:.1s" class="mt-5 max-w-[46ch] text-den/70">
+            Dezelfde hond, twee gemoedstoestanden. Wissel tussen ontspannen en gespannen en zie hoe vijf kleine signalen het hele verhaal vertellen.
+          </p>
+
+          <div data-reveal style="--d:.14s" class="mt-8 inline-flex rounded-full border border-den/15 bg-duin p-1 text-sm font-medium">
+            <button type="button" data-state="calm" class="st-toggle rounded-full px-5 py-2 transition-colors">Ontspannen</button>
+            <button type="button" data-state="tense" class="st-toggle rounded-full px-5 py-2 transition-colors">Gespannen</button>
+          </div>
+
+          <ul class="mt-9 flex flex-col">
+            {signals.map((s, i) => (
+              <li data-reveal style={`--d:${0.16 + i * 0.05}s`} class="group border-t border-den/12 py-5 last:border-b">
+                <div class="flex items-baseline gap-5">
+                  <span class="w-7 shrink-0 font-display text-sm text-klei">{String(i + 1).padStart(2, "0")}</span>
+                  <div class="flex-1">
+                    <h3 class="font-display text-xl text-den">{s.label}</h3>
+                    <p class="st-text st-calm mt-1.5 text-den/70">{s.calm}</p>
+                    <p class="st-text st-tense mt-1.5 text-den/70">{s.tense}</p>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DE AANPAK: van onrust naar rust ============ -->
+  <section id="aanpak" class="relative overflow-hidden bg-getij py-[clamp(5rem,12vw,9rem)] text-duin-50">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.22]"
+      style="background-image:url('/images/art/duin-mist.png');background-size:cover;background-position:center"
+      aria-hidden="true"
+    ></div>
+    <div class="absolute inset-0" style="background:linear-gradient(180deg,var(--color-getij),transparent 30%,transparent 70%,var(--color-getij))" aria-hidden="true"></div>
+
+    <div class="relative mx-auto max-w-[88rem] px-5 sm:px-8">
+      <div class="max-w-[34ch]">
+        <p data-reveal class="text-[0.78rem] uppercase tracking-[0.26em] text-klei-400">De aanpak</p>
+        <h2 data-reveal style="--d:.06s" class="mt-5 font-display text-[clamp(2rem,5vw,3.8rem)] leading-[1.0]">
+          Van een strakke lijn naar een losse.
+        </h2>
+        <p data-reveal style="--d:.1s" class="mt-5 text-duin-50/70">
+          Vier stappen. De spanning gaat er stap voor stap af, bij jou en bij je hond.
+        </p>
+      </div>
+
+      <div class="mt-16 grid gap-y-2 lg:grid-cols-[80px_1fr]">
+        <!-- riem-rail -->
+        <div class="relative hidden lg:block">
+          <svg id="leash-rail" class="absolute left-1/2 top-0 h-full w-20 -translate-x-1/2 text-klei" viewBox="0 0 80 1000" preserveAspectRatio="none" fill="none" aria-hidden="true">
+            <path id="leash-track" d="M40 0 L40 520 C40 660, 74 720, 40 820 S 8 940, 40 1000" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.18" vector-effect="non-scaling-stroke" />
+            <path id="leash-draw" d="M40 0 L40 520 C40 660, 74 720, 40 820 S 8 940, 40 1000" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" vector-effect="non-scaling-stroke" pathlength="1" style="stroke-dasharray:1;stroke-dashoffset:1" />
+          </svg>
+        </div>
+
+        <ol class="flex flex-col">
+          {steps.map((step, i) => (
+            <li data-reveal style={`--d:${i * 0.05}s`} class="step grid grid-cols-[auto_1fr] gap-x-6 border-t border-duin-50/12 py-9 first:border-t-0 sm:gap-x-10 sm:py-12">
+              <span class="font-display text-[clamp(2.2rem,5vw,3.4rem)] leading-none text-klei-400/90">{step.n}</span>
+              <div>
+                <h3 class="font-display text-[clamp(1.5rem,3vw,2.2rem)] leading-tight">{step.title}</h3>
+                <p class="mt-1 text-lg text-klei-400/90">{step.line}</p>
+                <p class="mt-4 max-w-[52ch] text-duin-50/72">{step.body}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DIENSTEN (editoriale rijen) ============ -->
+  <section class="relative bg-duin py-[clamp(5rem,12vw,9rem)]">
+    <div class="mx-auto max-w-[88rem] px-5 sm:px-8">
+      <div class="flex flex-wrap items-end justify-between gap-6">
+        <div>
+          <p data-reveal class="text-[0.78rem] uppercase tracking-[0.26em] text-salie">Hoe ik help</p>
+          <h2 data-reveal style="--d:.06s" class="mt-5 font-display text-[clamp(2rem,5vw,3.6rem)] leading-[1.0] text-den">
+            Vier wegen naar rust
+          </h2>
+        </div>
+        <a data-reveal style="--d:.1s" href="/diensten" class="link-underline hidden text-sm font-semibold text-den sm:block">
+          Alle diensten en details
+        </a>
+      </div>
+
+      <div id="dienst-list" class="relative mt-12">
+        <!-- zwevende preview (desktop) -->
+        <div id="dienst-preview" class="pointer-events-none absolute left-0 top-0 z-20 hidden aspect-[5/4] w-[clamp(15rem,22vw,21rem)] overflow-hidden rounded-[2px] opacity-0 shadow-2xl lg:block">
+          {services.map((s) => (
+            <img src={s.image} alt="" data-slug={s.slug} class="dp-img absolute inset-0 h-full w-full object-cover opacity-0" />
+          ))}
+        </div>
+
+        {services.map((s, i) => (
+          <a
+            href={`/diensten#${s.slug}`}
+            class="dienst-row group relative grid grid-cols-[auto_1fr_auto] items-center gap-5 border-t border-den/12 py-7 transition-colors last:border-b hover:bg-duin-200/40 sm:gap-8 sm:py-9"
+            data-slug={s.slug}
+            data-reveal
+            style={`--d:${i * 0.05}s`}
+          >
+            <span class="font-display text-sm text-klei">{s.index}</span>
+            <div class="min-w-0">
+              <h3 class="font-display text-[clamp(1.6rem,3.4vw,2.6rem)] leading-tight text-den transition-transform duration-500 group-hover:translate-x-1.5">{s.title}</h3>
+              <p class="mt-1 text-den/55">{s.kicker}</p>
+              <!-- mobiele thumb -->
+              <div class="reveal-media mt-4 aspect-[16/9] w-full overflow-hidden rounded-[2px] lg:hidden">
+                <img src={s.image} alt={s.imageAlt} class="h-full w-full object-cover" loading="lazy" />
+              </div>
+            </div>
+            <div class="flex items-center gap-4 sm:gap-7">
+              <span class="hidden whitespace-nowrap text-right text-sm text-den/60 sm:block">{s.price}</span>
+              <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-den/20 text-den transition-all duration-500 group-hover:border-klei group-hover:bg-klei group-hover:text-duin-50">
+                <svg class="h-4 w-4 transition-transform duration-500 group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+      <a href="/diensten" class="link-underline mt-10 inline-block text-sm font-semibold text-den sm:hidden">Alle diensten en details</a>
+    </div>
+  </section>
+
+  <!-- ============ PIETERNEL ============ -->
+  <section class="relative bg-duin-100 py-[clamp(5rem,12vw,9rem)]">
+    <div class="mx-auto grid max-w-[88rem] gap-12 px-5 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-20">
+      <div class="reveal-media relative aspect-[4/5] overflow-hidden rounded-[2px]">
+        <img src="/images/real/pieternel-van-haaften.jpg" alt="Pieternel van Haaften, hondengedragsconsulent" class="h-full w-full object-cover object-[center_20%]" loading="lazy" />
+      </div>
+      <div>
+        <p data-reveal class="text-[0.78rem] uppercase tracking-[0.26em] text-salie">Wie je begeleidt</p>
+        <h2 data-reveal style="--d:.06s" class="mt-5 font-display text-[clamp(2rem,4.6vw,3.4rem)] leading-[1.02] text-den">
+          Pieternel van Haaften
+        </h2>
+        <p data-reveal style="--d:.1s" class="mt-6 max-w-[50ch] text-xl leading-relaxed text-den/80">
+          Dertig jaar werkte ik in de zorg voor mensen met een verstandelijke beperking. Daar leerde ik wat echt contact vraagt: geduld, rust en heel goed kijken.
+        </p>
+        <p data-reveal style="--d:.16s" class="mt-4 max-w-[50ch] leading-relaxed text-den/65">
+          Die houding nam ik mee naar honden. Niet sturen op gedrag, maar op begrip. Met meerdere diploma's in hondenpsychologie en een rustige, respectvolle benadering.
+        </p>
+        <a data-reveal style="--d:.2s" href="/over-pieternel" class="btn mt-8 border border-den/20 px-6 py-3.5 text-den hover:bg-den hover:text-duin-50">
+          Lees mijn verhaal
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ZEELAND / RUIMTE ============ -->
+  <section class="relative flex min-h-[78svh] items-end overflow-hidden bg-getij text-duin-50">
+    <!-- altijd-zichtbare sfeerlaag (fallback als AI-beeld ontbreekt) -->
+    <div class="absolute inset-0" style="background:radial-gradient(125% 95% at 72% 18%, #2c5247 0%, transparent 58%), radial-gradient(90% 80% at 18% 96%, rgba(188,106,67,.22), transparent 55%), linear-gradient(180deg,#0e2723,#13302b)" aria-hidden="true"></div>
+    <svg class="absolute inset-x-0 bottom-[36%] w-full opacity-30" viewBox="0 0 1200 120" preserveAspectRatio="none" fill="none" aria-hidden="true">
+      <path d="M0 70 C 260 40, 420 92, 680 64 S 1040 38, 1200 76" stroke="#cdd6d1" stroke-width="1" opacity="0.5" />
+      <path d="M0 96 C 300 78, 500 108, 760 88 S 1050 70, 1200 100" stroke="#cdd6d1" stroke-width="1" opacity="0.3" />
+    </svg>
+    <!-- AI-sfeerbeeld dekt de fallback zodra het bestaat -->
+    <div class="absolute inset-0" style="background-image:url('/images/art/kust-ochtend.png');background-size:cover;background-position:center" aria-hidden="true"></div>
+    <div class="absolute inset-0" style="background:linear-gradient(180deg,rgba(19,48,43,.55),rgba(19,48,43,.2) 40%,rgba(19,48,43,.92))" aria-hidden="true"></div>
+    <div class="relative z-10 mx-auto w-full max-w-[88rem] px-5 py-20 sm:px-8">
+      <p data-reveal class="text-[0.78rem] uppercase tracking-[0.26em] text-klei-400">Werkgebied</p>
+      <h2 data-reveal style="--d:.06s" class="mt-5 max-w-[20ch] font-display text-[clamp(2.2rem,6vw,4.6rem)] leading-[0.98]">
+        Heel Zeeland heeft ruimte. Die gebruiken we.
+      </h2>
+      <p data-reveal style="--d:.1s" class="mt-6 max-w-[52ch] text-lg text-duin-50/80">
+        Ik kom door heel de provincie. Cursussen en wandelingen op zorgvuldig gekozen plekken, rustig, overzichtelijk en met genoeg ruimte om te leren.
+      </p>
+      <ul data-reveal style="--d:.16s" class="mt-9 flex flex-wrap gap-x-8 gap-y-3 font-display text-xl text-duin-50/90 sm:text-2xl">
+        {site.towns.map((t) => (
+          <li class="flex items-center gap-3"><span class="inline-block h-1.5 w-1.5 rounded-full bg-klei"></span>{t}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+    gsap.registerPlugin(ScrollTrigger);
+    const reduce = document.documentElement.classList.contains("rm");
+
+    // ---- Stille taal: ontspannen / gespannen ----
+    const st = document.getElementById("stille-taal");
+    if (st) {
+      const toggles = st.querySelectorAll<HTMLButtonElement>(".st-toggle");
+      const setState = (state: string) => {
+        st.classList.toggle("state-calm", state === "calm");
+        st.classList.toggle("state-tense", state === "tense");
+        toggles.forEach((b) => b.classList.toggle("is-active", b.dataset.state === state));
+      };
+      toggles.forEach((b) => b.addEventListener("click", () => setState(b.dataset.state || "calm")));
+      setState("calm");
+    }
+
+    // ---- Riem-rail: tekenen op scroll ----
+    const draw = document.getElementById("leash-draw") as SVGPathElement | null;
+    if (draw) {
+      // pathlength="1": genormaliseerd tekenen, klopt ook bij uitgerekte viewBox
+      draw.style.strokeDasharray = "1";
+      if (reduce) {
+        draw.style.strokeDashoffset = "0";
+      } else {
+        draw.style.strokeDashoffset = "1";
+        ScrollTrigger.create({
+          trigger: "#aanpak ol",
+          start: "top 78%",
+          end: "bottom 72%",
+          scrub: 0.6,
+          onUpdate: (self) => {
+            draw.style.strokeDashoffset = `${1 - self.progress}`;
+          },
+        });
+      }
+    }
+
+    // ---- Diensten: zwevende preview (desktop) ----
+    const list = document.getElementById("dienst-list");
+    const preview = document.getElementById("dienst-preview");
+    if (list && preview && !reduce && window.matchMedia("(pointer:fine)").matches) {
+      const rows = list.querySelectorAll<HTMLElement>(".dienst-row");
+      const imgs = preview.querySelectorAll<HTMLElement>(".dp-img");
+      let raf = 0,
+        tx = 0,
+        ty = 0,
+        cx = 0,
+        cy = 0,
+        active = false;
+      const loop = () => {
+        cx += (tx - cx) * 0.14;
+        cy += (ty - cy) * 0.14;
+        preview.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
+        raf = requestAnimationFrame(loop);
+      };
+      const show = (slug: string) => {
+        imgs.forEach((im) => im.classList.toggle("opacity-100", im.dataset.slug === slug));
+        preview.style.opacity = "1";
+      };
+      rows.forEach((row) => {
+        row.addEventListener("mouseenter", () => {
+          if (!active) {
+            active = true;
+            loop();
+          }
+          show(row.dataset.slug || "");
+        });
+        row.addEventListener("mousemove", (e) => {
+          const r = list.getBoundingClientRect();
+          tx = e.clientX - r.left;
+          ty = e.clientY - r.top;
+        });
+        row.addEventListener("mouseleave", () => {
+          preview.style.opacity = "0";
+        });
+      });
+    }
+  </script>
+
+  <style>
+    /* hero ken-burns */
+    .kenburns { animation: kb 26s var(--ease-quint) infinite alternate; will-change: transform; }
+    @keyframes kb { from { transform: scale(1.05); } to { transform: scale(1.15); } }
+    .scroll-cue { transform-origin: top; animation: cue 2.4s var(--ease-quint) infinite; }
+    @keyframes cue { 0%,100% { transform: scaleY(0.4); opacity: 0.4; } 50% { transform: scaleY(1); opacity: 1; } }
+
+    /* stille taal toggle */
+    .st-toggle { color: color-mix(in oklab, var(--color-den) 55%, transparent); }
+    .st-toggle.is-active { background: var(--color-den); color: var(--color-duin-50); }
+    .st-text { display: none; }
+    #stille-taal.state-calm .st-calm { display: block; }
+    #stille-taal.state-tense .st-tense { display: block; }
+    #dienst-preview { transition: opacity 0.45s var(--ease-expo); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .kenburns { animation: none; }
+      .scroll-cue { animation: none; }
+    }
+  </style>
+</Base>
