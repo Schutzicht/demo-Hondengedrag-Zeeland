@@ -6,7 +6,7 @@ import { services, site } from "../data/site";
 <Base title="Diensten" headerTone="light" description="Consult aan huis, online theorieles, puppy- en jonge hondencursus en groepswandelingen in heel Zeeland.">
   <!-- pagina-hero -->
   <section class="bg-duin pt-36 pb-[clamp(3rem,7vw,6rem)] sm:pt-40">
-    <div class="mx-auto max-w-[88rem] px-5 sm:px-8">
+    <div class="mx-auto max-w-[80rem] px-5 sm:px-8">
       <p data-reveal class="text-[0.78rem] uppercase tracking-[0.26em] text-salie">Diensten</p>
       <h1 data-reveal style="--d:.06s" class="mt-6 max-w-[18ch] font-display text-[clamp(2.6rem,7vw,5.6rem)] leading-[0.96] text-den">
         Begeleiding die past bij jullie vraag
@@ -28,7 +28,7 @@ import { services, site } from "../data/site";
   <div class="bg-duin pb-[clamp(4rem,10vw,8rem)]">
     {services.map((s, i) => (
       <section id={s.slug} class="scroll-mt-28 border-t border-den/10 py-[clamp(3.5rem,8vw,7rem)]">
-        <div class={`mx-auto grid max-w-[88rem] items-center gap-10 px-5 sm:px-8 lg:grid-cols-2 lg:gap-16 ${i % 2 === 1 ? "lg:[&>div:first-child]:order-2" : ""}`}>
+        <div class={`mx-auto grid max-w-[80rem] items-center gap-10 px-5 sm:px-8 lg:grid-cols-2 lg:gap-16 ${i % 2 === 1 ? "lg:[&>div:first-child]:order-2" : ""}`}>
           <div class="reveal-media relative aspect-[4/3] overflow-hidden rounded-[2px]">
             <img src={s.image} alt={s.imageAlt} class="h-full w-full object-cover" loading="lazy" />
             <span class="absolute left-5 top-5 rounded-full bg-duin-50/90 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.15em] text-den">{s.index}</span>
@@ -73,7 +73,7 @@ import { services, site } from "../data/site";
 
   <!-- afsluiter -->
   <section class="bg-duin-100 py-[clamp(4rem,9vw,7rem)]">
-    <div class="mx-auto max-w-[88rem] px-5 text-center sm:px-8">
+    <div class="mx-auto max-w-[80rem] px-5 text-center sm:px-8">
       <h2 data-reveal class="mx-auto max-w-[20ch] font-display text-[clamp(1.9rem,4.6vw,3.2rem)] leading-[1.05] text-den">
         Niet zeker welke vorm past?
       </h2>

@@ -104,43 +104,25 @@ body::after {
 }
 
 /* ---------- Reveal-systeem (progressive enhancement) ---------- */
-html.js:not(.rm) [data-reveal] {
+/* Subtiel en betrouwbaar: zachte fade-up, nooit blijvend verborgen. */
+html.reveal-on:not(.rm) [data-reveal] {
   opacity: 0;
-  transform: translateY(34px) scale(0.985);
+  transform: translateY(16px);
   transition:
-    opacity 0.85s var(--ease-expo) var(--d, 0s),
-    transform 0.85s var(--ease-expo) var(--d, 0s);
+    opacity 0.7s var(--ease-expo) var(--d, 0s),
+    transform 0.7s var(--ease-expo) var(--d, 0s);
 }
-html.js:not(.rm) [data-reveal].in {
-  opacity: 1;
-  transform: none;
-}
+html.reveal-on:not(.rm) [data-reveal].in { opacity: 1; transform: none; }
 
-/* Beeld-reveal: container klipt open, inner beeld zoomt rustig uit */
+/* Beeld zoomt heel rustig uit bij binnenkomst */
 .reveal-media { overflow: hidden; }
-html.js:not(.rm) .reveal-media {
-  clip-path: inset(0 0 101% 0);
-  transition: clip-path 1.15s var(--ease-expo) var(--d, 0s);
+html.reveal-on:not(.rm) .reveal-media > img,
+html.reveal-on:not(.rm) .reveal-media > picture > img {
+  transform: scale(1.05);
+  transition: transform 1.1s var(--ease-expo);
 }
-html.js:not(.rm) .reveal-media.in { clip-path: inset(0 0 0 0); }
-html.js:not(.rm) .reveal-media > img,
-html.js:not(.rm) .reveal-media > picture > img {
-  transform: scale(1.12);
-  transition: transform 1.7s var(--ease-expo) var(--d, 0s);
-}
-html.js:not(.rm) .reveal-media.in > img,
-html.js:not(.rm) .reveal-media.in > picture > img { transform: scale(1); }
-
-/* Kinetische kop: woord voor woord, GEEN clip (descenders blijven heel) */
-html.js:not(.rm) .words .word {
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(0.46em) rotate(1.4deg);
-  transition:
-    opacity 0.72s var(--ease-expo) var(--d, 0s),
-    transform 0.72s var(--ease-expo) var(--d, 0s);
-}
-html.js:not(.rm) .words.in .word { opacity: 1; transform: none; }
+html.reveal-on:not(.rm) .reveal-media.in > img,
+html.reveal-on:not(.rm) .reveal-media.in > picture > img { transform: scale(1); }
 
 /* ---------- Micro-interacties ---------- */
 .press { transition: transform 0.22s var(--ease-quint); }
