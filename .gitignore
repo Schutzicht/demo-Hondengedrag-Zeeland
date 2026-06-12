@@ -16,3 +16,4 @@ _scrape/
 # editor
 .vscode/
 *.log
+.vercel

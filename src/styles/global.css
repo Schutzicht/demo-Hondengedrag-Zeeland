@@ -16,16 +16,16 @@
 
   --color-den: #1a201d; /* inkt, diep warm zwartgroen */
   --color-den-600: #2a322e;
-  --color-getij: #14302b; /* donkere filmische secties */
-  --color-getij-700: #0e2722;
+  --color-getij: #1c3a24; /* bosgroen (haar groen), donkere secties */
+  --color-getij-700: #142c1b;
 
   --color-salie: #7d8a7e; /* steen / salie */
   --color-salie-300: #a8b2a7;
   --color-salie-100: #d4dad2;
 
-  --color-klei: #c06a40; /* terracotta accent */
-  --color-klei-400: #d4855e;
-  --color-klei-600: #9d5330;
+  --color-klei: #2f7d4a; /* grasgroen accent (haar groen) */
+  --color-klei-400: #57a771;
+  --color-klei-600: #246039;
 
   --color-mist: #cdd6d1;
 

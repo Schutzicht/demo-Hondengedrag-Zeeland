@@ -1,46 +1,48 @@
 ---
 import Base from "../layouts/Base.astro";
-import { site, services, steps, signals } from "../data/site";
+import { site, services, steps, signals, reviews } from "../data/site";
 ---
 
 <Base headerTone="dark">
-  <!-- ============ HERO ============ -->
-  <section class="hero relative flex min-h-[100svh] items-center overflow-hidden bg-getij">
-    <div class="absolute inset-0">
-      <img
-        src="/images/art/hero-dijk.png"
-        alt="Baas wandelt met hond aan een losse lijn over de Zeeuwse dijk bij dageraad"
-        class="kenburns h-full w-full object-cover object-center"
-        fetchpriority="high"
-      />
-      <div class="absolute inset-0" style="background:linear-gradient(82deg, rgba(15,39,34,.85) 0%, rgba(15,39,34,.42) 42%, rgba(15,39,34,0) 74%)"></div>
-      <div class="absolute inset-0" style="background:linear-gradient(180deg, rgba(15,39,34,.30) 0%, transparent 28%, transparent 54%, rgba(15,39,34,.82) 100%)"></div>
-    </div>
-
-    <div class="relative z-10 mx-auto w-full max-w-[80rem] px-6 py-24 sm:px-8">
-      <p data-reveal class="mb-6 flex items-center gap-3 text-[0.74rem] font-medium uppercase tracking-[0.24em] text-duin-50/80">
-        <span class="inline-block h-px w-9 bg-klei"></span>
-        {site.role} in heel Zeeland
+  <!-- ============ HERO (split, haar eigen foto) ============ -->
+  <section class="hero relative flex flex-col bg-getij text-duin-50 lg:grid lg:min-h-[100svh] lg:grid-cols-[0.92fr_1.08fr]">
+    <div class="order-2 flex flex-col justify-center px-6 pb-16 pt-12 sm:px-10 lg:order-1 lg:py-20 lg:pl-14 lg:pr-14 2xl:pl-24">
+      <p data-reveal class="mb-6 flex items-center gap-3 text-[0.74rem] font-medium uppercase tracking-[0.22em] text-klei-400">
+        <span class="inline-block h-px w-9 bg-klei-400"></span>
+        {site.role} · Heel Zeeland
       </p>
-      <h1 data-reveal style="--d:.08s" class="display max-w-[15ch] font-display text-[clamp(2.4rem,7.5vw,6.4rem)] font-semibold leading-[1.0] text-duin-50">
+      <h1 data-reveal style="--d:.06s" class="display font-display text-[clamp(2.4rem,6vw,4.6rem)] font-semibold leading-[1.02]">
         Achter elk gedrag zit een reden.
       </h1>
-      <p data-reveal style="--d:.16s" class="mt-7 max-w-[46ch] text-lg leading-relaxed text-duin-50/85">
+      <p data-reveal style="--d:.12s" class="mt-6 max-w-[42ch] text-lg leading-relaxed text-duin-50/85">
         {site.intro}
       </p>
-      <div data-reveal style="--d:.24s" class="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
-        <a href="/contact" class="btn bg-klei px-7 py-4 text-duin-50 hover:bg-klei-400">Plan een kennismaking</a>
+      <div data-reveal style="--d:.18s" class="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+        <a href="/contact" class="btn bg-duin-50 px-7 py-4 text-getij hover:bg-white">Plan een kennismaking</a>
         <a href="#aanpak" class="btn border border-duin-50/30 px-7 py-4 text-duin-50 hover:bg-duin-50/10">Bekijk de aanpak</a>
+      </div>
+      <div data-reveal style="--d:.24s" class="mt-8 flex items-center gap-3">
+        <span class="flex gap-0.5">
+          {[0,1,2,3,4].map(() => (
+            <svg class="h-4 w-4 text-[#e7b54e]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3 6.8.6-5.1 4.5 1.5 6.7L12 17.2 5.9 20.6l1.5-6.7-5.1-4.5 6.8-.6z"/></svg>
+          ))}
+        </span>
+        <span class="text-sm text-duin-50/75">{reviews.label}</span>
       </div>
     </div>
 
-    <div class="absolute inset-x-0 bottom-7 z-10 mx-auto flex w-full max-w-[80rem] items-center gap-3 px-6 text-duin-50/55 sm:px-8">
-      <span class="scroll-cue inline-block h-9 w-px bg-duin-50/40"></span>
-      <span class="text-xs uppercase tracking-[0.18em]">Scroll</span>
+    <div class="relative order-1 aspect-[5/4] w-full overflow-hidden lg:order-2 lg:aspect-auto lg:h-auto">
+      <img
+        src="/images/real/hero-hond-aan-lijn.jpg"
+        alt="Pieternel laat een blije hond aan een losse, groene lijn meelopen"
+        class="h-full w-full object-cover object-[58%_center]"
+        fetchpriority="high"
+      />
+      <div class="absolute inset-0 lg:hidden" style="background:linear-gradient(180deg,transparent 60%,rgba(28,58,36,.18))"></div>
     </div>
   </section>
 
-  <!-- ============ INTRO ============ -->
+  <!-- ============ MANIFEST ============ -->
   <section class="bg-duin py-[clamp(5.5rem,12vw,9rem)]">
     <div class="mx-auto max-w-[80rem] px-6 sm:px-8">
       <div class="grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-24">
@@ -52,7 +54,7 @@ import { site, services, steps, signals } from "../data/site";
         </div>
         <div class="flex flex-col gap-6 self-center text-lg leading-relaxed text-den/70">
           <p data-reveal style="--d:.1s">
-            De meeste trainingen werken aan het gedrag zelf: afleren, corrigeren, belonen. Ik kijk een stap eerder, naar de reden eronder. Want pas als je begrijpt waarom je hond reageert, verandert er iets dat blijft.
+            Daarom werk ik niet aan de hond, maar aan de mens erachter. Hoe je communiceert, hoe je de lijn hanteert, hoe je rust brengt. Verander dat, en het gedrag verandert mee.
           </p>
           <p data-reveal style="--d:.16s">
             Geen strak schema en geen trucjes. Wel rust, ruimte en een manier van kijken die je daarna nooit meer verleert.
@@ -111,10 +113,10 @@ import { site, services, steps, signals } from "../data/site";
       <ol class="mt-14 border-t border-duin-50/12">
         {steps.map((step, i) => (
           <li data-reveal style={`--d:${i * 0.04}s`} class="grid gap-3 border-b border-duin-50/12 py-9 sm:grid-cols-[8rem_1fr] sm:gap-12 sm:py-11">
-            <span class="font-display text-[clamp(2rem,4vw,2.8rem)] font-semibold leading-none text-klei-400/90">{step.n}</span>
+            <span class="font-display text-[clamp(2rem,4vw,2.8rem)] font-semibold leading-none text-klei-400">{step.n}</span>
             <div>
               <h3 class="font-display text-[clamp(1.4rem,2.6vw,1.9rem)] font-semibold leading-tight">{step.title}</h3>
-              <p class="mt-1.5 text-lg text-klei-400/90">{step.line}</p>
+              <p class="mt-1.5 text-lg text-klei-400">{step.line}</p>
               <p class="mt-4 max-w-[58ch] leading-relaxed text-duin-50/72">{step.body}</p>
             </div>
           </li>
@@ -130,7 +132,7 @@ import { site, services, steps, signals } from "../data/site";
         <div>
           <p data-reveal class="text-[0.74rem] font-medium uppercase tracking-[0.22em] text-salie">Diensten</p>
           <h2 data-reveal style="--d:.06s" class="mt-5 font-display text-[clamp(1.9rem,4.4vw,3.2rem)] font-semibold leading-[1.04] text-den">
-            Vier wegen naar rust
+            Hulp die past bij jouw vraag
           </h2>
         </div>
         <a data-reveal style="--d:.1s" href="/diensten" class="link-underline hidden text-sm font-semibold text-den sm:block">
@@ -148,6 +150,9 @@ import { site, services, steps, signals } from "../data/site";
                 class="h-full w-full object-cover transition-transform duration-[850ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.045]"
                 loading="lazy"
               />
+              {s.featured && (
+                <span class="absolute left-4 top-4 rounded-full bg-klei px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-duin-50">Net een pup?</span>
+              )}
             </div>
             <div class="mt-5 flex items-start justify-between gap-5 border-t border-den/10 pt-4">
               <div>
@@ -180,10 +185,10 @@ import { site, services, steps, signals } from "../data/site";
           Pieternel van Haaften
         </h2>
         <p data-reveal style="--d:.1s" class="mt-6 max-w-[50ch] text-lg leading-relaxed text-den/80">
-          Dertig jaar werkte ik in de zorg voor mensen met een verstandelijke beperking. Daar leerde ik wat echt contact vraagt: geduld, rust en heel goed kijken.
+          Zelf had ik een lastige Duitse herder. Door hem ben ik alles gaan uitzoeken, en raakte ik zo overtuigd van wat rust en begrip kunnen doen, dat ik er mijn werk van maakte.
         </p>
         <p data-reveal style="--d:.16s" class="mt-4 max-w-[50ch] leading-relaxed text-den/65">
-          Die houding nam ik mee naar honden. Niet sturen op gedrag, maar op begrip. Met meerdere diploma's in hondenpsychologie en een rustige, respectvolle benadering.
+          Daarvoor werkte ik dertig jaar in de zorg. Daar leerde ik wat echt contact vraagt: geduld, rust en goed kijken. Met meerdere diploma's in hondenpsychologie help ik niet zozeer de hond, maar de mens erachter.
         </p>
         <a data-reveal style="--d:.2s" href="/over-pieternel" class="btn mt-8 border border-den/20 px-6 py-3.5 text-den hover:bg-den hover:text-duin-50">
           Lees mijn verhaal
@@ -193,27 +198,22 @@ import { site, services, steps, signals } from "../data/site";
   </section>
 
   <!-- ============ ZEELAND ============ -->
-  <section class="relative flex min-h-[70svh] items-end overflow-hidden bg-getij text-duin-50">
+  <section class="relative flex min-h-[68svh] items-end overflow-hidden bg-getij text-duin-50">
     <div class="absolute inset-0" style="background-image:url('/images/art/kust-ochtend.png');background-size:cover;background-position:center" aria-hidden="true"></div>
-    <div class="absolute inset-0" style="background:linear-gradient(180deg,rgba(15,39,34,.5),rgba(15,39,34,.2) 40%,rgba(15,39,34,.9))" aria-hidden="true"></div>
+    <div class="absolute inset-0" style="background:linear-gradient(180deg,rgba(28,58,36,.55),rgba(28,58,36,.25) 40%,rgba(28,58,36,.92))" aria-hidden="true"></div>
     <div class="relative z-10 mx-auto w-full max-w-[80rem] px-6 py-20 sm:px-8">
       <p data-reveal class="text-[0.74rem] font-medium uppercase tracking-[0.22em] text-klei-400">Werkgebied</p>
       <h2 data-reveal style="--d:.06s" class="mt-5 max-w-[20ch] font-display text-[clamp(2rem,5vw,4rem)] font-semibold leading-[1.0]">
         Door heel Zeeland, dichtbij waar je woont
       </h2>
-      <ul data-reveal style="--d:.12s" class="mt-9 flex flex-wrap gap-x-7 gap-y-3 text-lg text-duin-50/90">
+      <p data-reveal style="--d:.1s" class="mt-5 max-w-[50ch] text-lg text-duin-50/80">
+        Ik kom aan huis door de hele provincie en geef cursussen op zorgvuldig gekozen plekken. Vanuit Kapelle, met genoeg ruimte om rustig te leren.
+      </p>
+      <ul data-reveal style="--d:.16s" class="mt-9 flex flex-wrap gap-x-7 gap-y-3 text-lg text-duin-50/90">
         {site.towns.map((t) => (
-          <li class="flex items-center gap-2.5"><span class="inline-block h-1.5 w-1.5 rounded-full bg-klei"></span>{t}</li>
+          <li class="flex items-center gap-2.5"><span class="inline-block h-1.5 w-1.5 rounded-full bg-klei-400"></span>{t}</li>
         ))}
       </ul>
     </div>
   </section>
-
-  <style>
-    .kenburns { animation: kb 28s var(--ease-quint) infinite alternate; will-change: transform; }
-    @keyframes kb { from { transform: scale(1.04); } to { transform: scale(1.12); } }
-    .scroll-cue { transform-origin: top; animation: cue 2.4s var(--ease-quint) infinite; }
-    @keyframes cue { 0%,100% { transform: scaleY(0.4); opacity: 0.4; } 50% { transform: scaleY(1); opacity: 1; } }
-    @media (prefers-reduced-motion: reduce) { .kenburns, .scroll-cue { animation: none; } }
-  </style>
 </Base>
